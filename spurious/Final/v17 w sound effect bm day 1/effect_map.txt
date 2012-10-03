@@ -1,0 +1,10 @@
+22, bubbles;
+23, cookie;
+24, puzzle_knob;
+25, laser;
+26, puzzle_switch;
+27, strobe;
+28, vib1;
+29, vib2;
+30, shortwave;
+31, ambient;

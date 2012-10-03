@@ -1,0 +1,112 @@
+' =========================================================================
+'
+'   File....... RFID_basic.BS2
+'   Purpose.... RFID Tag Reader
+'   Author..... (c) Parallax, Inc. -- All Rights Reserved
+'   E-mail..... support@parallax.com
+'   Started....
+'   Updated.... 02 Mar 2005
+'
+'   {$STAMP BS2}
+'   {$PBASIC 2.5}
+'
+' =========================================================================
+
+
+' -----[ Program Description ]---------------------------------------------
+'
+' Reads tags from a Parallax RFID reader and displays ID to debug screen
+
+
+' -----[ Revision History ]------------------------------------------------
+
+
+' -----[ I/O Definitions ]-------------------------------------------------
+
+Enable          PIN     0                       ' low = reader on
+RX              PIN     1                       ' serial from reader
+
+
+
+' -----[ Constants ]-------------------------------------------------------
+
+    T2400       CON     396
+
+
+Baud            CON     T2400
+
+LastTag         CON     3
+
+
+
+
+' -----[ Variables ]-------------------------------------------------------
+
+buf           VAR     Byte(10)                ' RFID bytes buffer
+tagNum          VAR     Byte                     ' from EEPROM table
+idx             VAR     Byte                    ' tag byte index
+counter  VAR    Byte    'used in Make_Drink
+relay VAR Byte  'used in Make_Drink
+
+compare  VAR   Byte(10)
+' -----[ Initialization ]--------------------------------------------------
+
+Reset:
+  HIGH Enable                                   ' turn of RFID reader
+
+'----[EEPROM DATA]---------------
+DATA   "0F0296AFBC"         'drink 1
+DATA   "0F0296AF96"         'drink 2
+
+' -----[ Program Code ]----------------------------------------------------
+
+Main:
+  LOW Enable                                    ' activate the reader
+  SERIN RX, T2400, [WAIT($0A), STR buf\10]    ' wait for hdr + ID
+  HIGH Enable
+  GOSUB Compare_Tags
+  GOTO main
+
+
+
+
+
+  '----------- Subroutines -------------
+
+Compare_Tags:
+  matches VAR Byte
+  matches = 0
+
+  'DEBUG "Tag Identification number is: ", CR
+
+FOR tagnum = 1 TO 2
+    FOR idx = 0 TO 9                            ' scan bytes in tag
+      READ (tagNum - 1 * 10 + idx), compare(idx)
+    NEXT
+    FOR idx = 0 TO 9    'compares to a tag in eeprom
+        IF buf(idx) = compare(idx) THEN
+        matches = (matches + 1)
+        ENDIF
+    NEXT
+
+    'DEBUG ? matches
+    IF matches = 10 THEN
+      GOSUB Make_Drink
+    ELSE
+      matches = 0
+    ENDIF
+NEXT
+RETURN
+
+
+Make_Drink:
+    randomvar VAR Byte
+  FOR randomvar = 1 TO 2
+    FOR relay = 8 TO 11
+      HIGH relay
+      PAUSE 140
+      LOW relay
+      PAUSE 10
+  NEXT
+    NEXT
+RETURN

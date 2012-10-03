@@ -1,4 +1,4 @@
 old-art-projects
 ================
 
-Various wacky interactive art projects.
+Various wacky interactive art projects. 

@@ -1,0 +1,3 @@
+0, /xb/name1/pin1/ 4000;
+1, /xb/name2/pin1/ 3000;
+2, /xb/name2/pin2/ 2000;
