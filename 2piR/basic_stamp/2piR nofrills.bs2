@@ -1,0 +1,80 @@
+' {$STAMP BS2sx}
+' {$PBASIC 2.5}
+
+sequence VAR Bit(8)
+counter VAR Byte
+delay CON 1     'between 0 and 15 delay intervals
+
+
+main:
+DO
+sequence(0) = IN0
+sequence(1) = IN1
+sequence(2) = IN2
+sequence(3) = IN3
+sequence(4) = IN4
+sequence(5) = IN5
+sequence(6) = IN6
+sequence(7) = IN7
+'DEBUG BIN1 sequence(0)
+FOR counter = 0 TO 7
+  'IF NOT sequence(counter) THEN
+    LOW (counter + 8)
+  'ENDIF
+NEXT
+
+GOSUB set_it
+LOOP
+
+
+set_it:
+FOR counter = 0 TO 6 STEP 2
+  IF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+8)    ' fire high relay
+  ENDIF
+NEXT
+
+FOR counter = 1 TO 7 STEP 2
+  IF sequence(counter) AND sequence(counter-1) THEN
+    HIGH (counter+8)     'fire low relay
+  ENDIF
+NEXT
+RETURN
+
+
+
+
+'--------------junk below here
+
+xorit:
+FOR counter = 8 TO 15
+LOW counter
+NEXT
+
+FOR counter = 0 TO 7
+IF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+8)
+ELSEIF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+9)
+ENDIF
+PAUSE 26
+NEXT
+
+
+set_outputs:
+'set pins low low
+FOR counter = 0 TO 7
+IF sequence(counter) = 0 THEN
+LOW (counter + 8)
+ENDIF
+NEXT
+
+'set pins high according to reading
+FOR counter = 0 TO 7
+IF sequence(counter) = 1 THEN
+  HIGH (counter + 8)         'corresponding output pin
+ENDIF
+NEXT
+RETURN
+
+END

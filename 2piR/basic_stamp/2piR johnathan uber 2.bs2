@@ -1,0 +1,79 @@
+
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+tallreading   VAR Nib(4)
+shortreading  VAR Nib(4)
+counter       VAR Byte
+debounce      CON 3     ' between 1 and 6 works well
+tallsteep     CON 15    ' 15 is just a guess
+sensor        VAR Byte
+sensorhigh    VAR Bit
+sensorlow     VAR Bit
+wastall       VAR Nib(4)
+
+main:
+DO
+
+' init reading counters
+FOR counter = 0 TO 3
+  tallreading(counter)  = 0
+  shortreading(counter) = 0
+NEXT
+
+' accumlate readings for debouncing
+FOR counter = 1 TO debounce
+  tallreading(0) = tallreading(0) + IN0
+  tallreading(1) = tallreading(1) + IN2
+  tallreading(2) = tallreading(2) + IN4
+  tallreading(3) = tallreading(3) + IN6
+
+  shortreading(0) = shortreading(0) + IN1
+  shortreading(1) = shortreading(1) + IN3
+  shortreading(2) = shortreading(2) + IN5
+  shortreading(3) = shortreading(3) + IN7
+
+NEXT
+
+
+'set_pins
+FOR sensor = 0 TO 3
+  IF tallreading(sensor)  > debounce THEN
+    sensortall = 1
+  ELSE
+    sensortall = 0
+  ENDIF
+
+  IF shortreading(sensor) > debounce THEN
+    sensorshort = 1
+  ELSE
+    sensorshort = 0
+  ENDIF
+
+  IF (sensortall + sensorshort) = 0 THEN 'not (sensortall or sensorshort)
+    LOW (sensor * 2 + 8)
+    LOW (sensor * 2 + 9)
+    wastall(sensor) = 0
+  ELSE
+    IF sensortall AND (NOT sensorshort) THEN 'control tall effect
+      IF wastall(sensor) < tallsteep THEN
+        wastall(sensor) = wastall(sensor) + 1
+        HIGH (sensor * 2 + 9)
+        LOW  (sensor * 2 + 8)
+      ELSE
+        HIGH (sensor * 2 + 8)
+        LOW  (sensor * 2 + 9)
+      ENDIF
+
+    ELSE
+      HIGH (sensor * 2 + 9)
+      LOW  (sensor * 2 + 8)
+    ENDIF
+  ENDIF
+NEXT
+
+LOOP
+
+
+'------------END of line
+END

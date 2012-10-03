@@ -1,0 +1,86 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+reading VAR Nib(8)
+counter VAR Byte
+debounce CON 2   'between 1 and 7
+debouncedreading VAR Bit(8)
+level VAR Bit
+turnonfire VAR Bit
+sensor VAR Byte
+sensorhigh VAR Bit
+sensorlow VAR Bit
+
+
+main:
+DO
+
+FOR counter = 0 TO 7
+  reading(counter) = 0
+NEXT
+
+FOR counter = 1 TO debounce      'debounce
+reading(0) = reading(0) + IN0
+reading(1) = reading(1) + IN1
+reading(2) = reading(2) + IN2
+reading(3) = reading(3) + IN3
+reading(4) = reading(4) + IN4
+reading(5) = reading(5) + IN5
+reading(6) = reading(6) + IN6
+reading(7) = reading(7) + IN7
+NEXT
+
+FOR counter = 0 TO 1      'more debounce
+  IF reading(counter) < debounce THEN
+    debouncedreading(counter) = 0
+  ELSE
+    debouncedreading(counter) = 1
+  ENDIF
+NEXT
+
+
+'set_pins
+FOR sensor = 0 TO 1 STEP 2
+  sensorhigh = debouncedreading(sensor)
+  sensorlow = debouncedreading(sensor+1)
+  turnonfire = 0
+
+  IF sensorhigh XOR sensorlow THEN   'control high effect
+    level = 1
+    turnonfire = 1
+  ENDIF
+
+  IF sensorhigh AND sensorlow THEN   'control low effect
+    level = 0
+    turnonfire = 1
+  ENDIF
+
+  IF turnonfire THEN
+    IF level = 0 THEN
+     HIGH (sensor + 9)
+     LOW (sensor + 8)
+    ELSE
+     HIGH (sensor + 8)
+     LOW (sensor + 9)
+    ENDIF
+  ELSE
+    LOW (sensor + 8)
+    LOW (sensor + 9)
+  ENDIF
+
+
+
+
+NEXT
+
+LOOP
+
+
+
+
+RETURN
+
+'------------END of line
+END
+
+

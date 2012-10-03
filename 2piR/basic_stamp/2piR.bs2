@@ -1,0 +1,38 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+sequence VAR Bit(8)
+counter VAR Byte
+
+readings:
+DO
+sequence(0) = IN0
+sequence(1) = IN1
+sequence(2) = IN2
+sequence(3) = IN3
+sequence(4) = IN4
+sequence(5) = IN5
+sequence(6) = IN6
+sequence(7) = IN7
+'DEBUG BIN1 sequence(0)
+GOSUB set_outputs
+LOOP
+
+set_outputs:
+'set pins low low
+FOR counter = 0 TO 7
+IF sequence(counter) = 0 THEN
+LOW (counter + 8)
+ENDIF
+NEXT
+
+'set pins high according to reading
+FOR counter = 0 TO 7
+IF sequence(counter) = 1 THEN
+  HIGH (counter + 8)         'corresponding output pin
+ENDIF
+NEXT
+PAUSE 25
+RETURN
+
+END

@@ -1,0 +1,91 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+sequence VAR Bit(8)
+counter VAR Byte
+debounce CON 3
+
+
+main:
+DO
+
+FOR counter = 0 TO 7
+  reading(counter) = 0
+NEXT
+
+FOR counter = 1 TO debounce      'debounce
+reading(0) = reading(0) + IN0
+reading(1) = reading(1) + IN1
+reading(2) = reading(2) + IN2
+reading(3) = reading(3) + IN3
+reading(4) = reading(4) + IN4
+reading(5) = reading(5) + IN5
+reading(6) = reading(6) + IN6
+reading(7) = reading(7) + IN7
+NEXT
+
+FOR counter = 0 TO 7      'more debounce
+  IF reading(counter) < debounce THEN
+    reading(counter) = 0
+  ENDIF
+Next
+  IF NOT reading(counter) THEN
+    LOW (counter + 8)
+  ENDIF
+NEXT
+
+GOSUB set_pins
+LOOP
+
+
+set_pins:
+FOR counter = 0 TO 6 STEP 2
+  IF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+8)    ' fire high relay
+  ENDIF
+NEXT
+
+FOR counter = 1 TO 7 STEP 2
+  IF sequence(counter) AND sequence(counter-1) THEN
+    HIGH (counter+8)     'fire low relay
+  ENDIF
+NEXT
+RETURN
+
+
+
+
+'--------------junk below here
+
+xorit:
+FOR counter = 8 TO 15
+LOW counter
+NEXT
+
+FOR counter = 0 TO 7
+IF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+8)
+ELSEIF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+9)
+ENDIF
+PAUSE 26
+NEXT
+
+
+set_outputs:
+'set pins low low
+FOR counter = 0 TO 7
+IF sequence(counter) = 0 THEN
+LOW (counter + 8)
+ENDIF
+NEXT
+
+'set pins high according to reading
+FOR counter = 0 TO 7
+IF sequence(counter) = 1 THEN
+  HIGH (counter + 8)         'corresponding output pin
+ENDIF
+NEXT
+RETURN
+
+END

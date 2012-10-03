@@ -1,0 +1,62 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+sequence VAR Bit(8)
+counter VAR Byte
+delay VAR Byte(8)
+delayconst CON 20
+
+FOR counter = 0 TO 7
+  delay=delayconst     'prime the variable once
+NEXT
+
+'-------------MAIN
+main:
+DO
+sequence(0) = IN0
+sequence(1) = IN1
+sequence(2) = IN2
+sequence(3) = IN3
+sequence(4) = IN4
+sequence(5) = IN5
+sequence(6) = IN6
+sequence(7) = IN7
+'DEBUG ? delay(0)
+
+FOR counter = 0 TO 7
+  IF (delay(counter) < 1) AND sequence(counter) = 0 THEN 'off and out of delay
+    LOW (counter + 8)
+    delay(counter)=delayconst
+  ELSE  'is on
+    delay(counter) = (delay(counter)-1)
+  ENDIF
+NEXT
+
+GOSUB set_pins
+LOOP
+
+'-------------set pins high or low
+'pin 0 controls pin 8 (high), pin 1 controlls pin 9 (low), etc
+
+set_pins:
+FOR counter = 0 TO 6 STEP 2
+  IF sequence(counter) XOR sequence(counter+1) THEN
+    HIGH (counter+8)  ' fire high relay
+  ENDIF
+NEXT
+
+FOR counter = 1 TO 7 STEP 2
+  IF sequence(counter) AND sequence(counter-1) THEN
+    HIGH (counter+8) : LOW (counter+7)  'don't forget we're starting at 1
+  ENDIF
+NEXT
+
+RETURN
+
+
+
+'------End of the line
+END
+
+
+

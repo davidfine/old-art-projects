@@ -1,0 +1,46 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+reading VAR Bit(8)
+counter VAR Byte
+delaymax CON 5     'between 0 and 15 delay intervals
+delay CON 10
+
+main:
+DO
+reading(0) = IN0
+reading(1) = IN1
+reading(2) = IN2
+reading(3) = IN3
+reading(4) = IN4
+reading(5) = IN5
+reading(6) = IN6
+reading(7) = IN7
+'DEBUG BIN1 reading(0)
+FOR counter = 0 TO 7
+  IF  reading(counter) = 0 THEN
+    LOW (counter + 8)
+  ENDIF
+NEXT
+GOSUB set_it
+LOOP
+
+
+set_it:
+  FOR counter = 0 TO 6 STEP 2
+    IF reading(counter) XOR reading(counter+1) THEN
+      HIGH (counter+8)    ' fire high relay
+    ENDIF
+  NEXT
+
+  FOR counter = 1 TO 7 STEP 2
+   IF reading(counter) AND reading(counter-1) THEN
+    HIGH (counter+8)     'fire low relay
+   ENDIF
+  NEXT
+PAUSE delay
+
+RETURN
+
+
+
