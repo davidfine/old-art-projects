@@ -3,7 +3,7 @@ old-art-projects
 
 Various wacky interactive art projects. Not all code I'm proud of.
 
-2piR: A Ring of 16 heavenward pointing flame effects controlled by a ring of motion centers in the center. 
+2piR: A Ring of 16 heavenward pointing flame effects controlled by a ring of IR senosrs in the center. 
 
 Brave new pong: Flash version of pong where you controll the ball and computer moves paddles to prevent you from scoring.
 
