@@ -1,7 +1,7 @@
 /* 
 2piR for Arduino Mega. 
 David Fine
-Version 10120102 - untested
+Version 2012101901 - untested
 
 Pin guide:
 analog in on pins 0-15 to sensor CV.
