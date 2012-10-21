@@ -15,15 +15,16 @@ int sensorThreshold = 300;  // adjust sensitivity
 boolean lastState[15];  // 0 for Meh, 1 for ON FIRE!
 unsigned long time;
 unsigned long flameCounter[15];  // the time millis() when each effect last triggered
-int minimumFlame = 300; //milliseconds
-int buzzerPin = 39; // audible warning
-int armed = 1; // Start in armed mode
+int minimumFlame = 300; //milliseconds, latch time per effect when triggered
+int buzzerPin = 38; // audible warning
+int armed = 0 // Start in safe mode. If started this way, arm button is non-optional.
 
 void setup(){
-  attachInterrupt(2, safeMode, FALLING);  // disarm when pin grounded
-  attachInterrupt(3, armMode, FALLING);  // re-arm , break out of safeMode loop
   pinMode(20, INPUT_PULLUP); // interrupt 3 
   pinMode(21,INPUT_PULLUP);  // interrupt 2
+  attachInterrupt(2, safeMode, FALLING);  // disarm when pin grounded
+  attachInterrupt(3, armMode, FALLING);  // re-arm , break out of safeMode loop
+  
   pinMode(38, OUTPUT);  // arming buzzer
   for (int i=0; i <= 15; i++){
     pinMode(i, OUTPUT);
@@ -44,7 +45,7 @@ void startFire() {
   for(int i=0; i<=15; i++) {
     int currentState = (analogRead(i) > sensorThreshold);
      if ( currentState && (lastState[i] != currentState)) {  //switched state to high
-       digitalWrite((i + 22), HIGH);
+       digitalWrite((i + 22), HIGH);  //First effect relay is on pin22. 
        lastState[i] = 1;
        flameCounter[i] = (millis() + minimumFlame);
      }
