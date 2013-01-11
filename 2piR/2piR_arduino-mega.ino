@@ -44,7 +44,7 @@ int main(){
 void startFire() {
   for(int i=0; i<=15; i++) {
     int currentState = (analogRead(i) > sensorThreshold);
-     if ( currentState && (lastState[i] != currentState)) {  //if ( currentState XOR lastState[i] )
+     if (currentState ^ laststate[i]) // state has changed from 0 to 1 
        digitalWrite((i + 22), HIGH);  //First effect relay is on pin22. 
        lastState[i] = 1;
        flameCounter[i] = (millis() + minimumFlame);
