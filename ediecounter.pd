@@ -1,0 +1,172 @@
+#N canvas 115 34 1204 848 10;
+#N canvas 195 67 450 278 (subpatch) 0;
+#X array chirps 1440 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 1000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0;
+#X coords 0 30 1440 0 1000 240 1 0 0;
+#X restore -17 -200 graph;
+#X obj 63 78 tabread chirps;
+#X obj -17 56 hsl 1000 15 0 1440 0 0 empty empty Time_Slider -2 -8
+0 12 -262130 -1 -1 0 1;
+#X floatatom 63 103 4 0 0 1 Chirps_At_Time - -;
+#X obj -18 77 clock;
+#X obj -5 218 nbx 2 40 -1e+37 1e+37 0 0 empty reading Loudness 0 -22
+0 24 -261682 -1 -1 73 256;
+#N canvas 660 76 633 625 recordchiprs 0;
+#X obj 119 171 adc~;
+#X obj 123 279 peak;
+#X obj 120 221 env~;
+#X obj 199 135 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 199 159 metro 1000;
+#X obj 151 316 f;
+#X floatatom 183 195 5 0 0 0 - - -;
+#X obj 184 219 t f b;
+#X obj 120 245 int;
+#X obj 151 343 nbx 2 20 -1e+37 1e+37 0 0 reading empty empty 0 -8 0
+12 -262144 -1 -1 73 256;
+#X obj 198 474 counter 1000;
+#X floatatom 194 328 5 50 95 1 sensitivity - -;
+#X obj 150 396 moses 82;
+#X obj 308 223 time;
+#X obj 267 398 change;
+#X obj 257 549 tabwrite chirps;
+#X obj 336 290 * 60;
+#X obj 365 324 +;
+#X obj 119 196 hip~ 9000;
+#X obj 264 428 bng 15 250 50 0 empty empty reset 17 7 0 10 -262130
+-1 -1;
+#X obj 199 103 loadbang;
+#X obj 194 302 inlet;
+#X obj 370 534 outlet;
+#X text 370 552 Current time in seconds;
+#X floatatom 379 265 5 0 0 0 - - -;
+#X floatatom 335 264 5 0 0 0 - - -;
+#X text 117 147 Mic Input;
+#X obj 199 513 nbx 3 14 -1e+37 1e+37 0 0 numchirps empty Chirps 6 -8
+0 10 -262144 -1 -1 6 256;
+#X msg 422 453 \; chirps const 0;
+#X obj 421 416 bng 15 250 50 0 empty clear Clear_Graph 17 7 0 10 -262144
+-1 -1;
+#X obj 420 375 select 1439;
+#X floatatom 306 354 5 0 0 0 - - -;
+#X connect 0 0 18 0;
+#X connect 1 0 5 1;
+#X connect 2 0 8 0;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 4 0 13 0;
+#X connect 5 0 9 0;
+#X connect 6 0 7 0;
+#X connect 7 0 1 1;
+#X connect 7 1 5 0;
+#X connect 8 0 1 0;
+#X connect 9 0 12 0;
+#X connect 10 0 27 0;
+#X connect 11 0 12 1;
+#X connect 12 1 10 0;
+#X connect 13 0 25 0;
+#X connect 13 1 24 0;
+#X connect 14 0 19 0;
+#X connect 16 0 17 0;
+#X connect 17 0 15 1;
+#X connect 17 0 22 0;
+#X connect 17 0 30 0;
+#X connect 17 0 31 0;
+#X connect 18 0 2 0;
+#X connect 19 0 10 3;
+#X connect 20 0 3 0;
+#X connect 21 0 11 0;
+#X connect 24 0 17 1;
+#X connect 25 0 16 0;
+#X connect 27 0 15 0;
+#X connect 29 0 28 0;
+#X connect 30 0 29 0;
+#X connect 31 0 14 0;
+#X coords 0 625 1 624 800 800 0;
+#X restore 315 353 pd recordchiprs;
+#X obj 249 376 clock;
+#X obj 155 221 nbx 2 40 -1e+37 1e+37 0 0 empty numchirps Chirps_This_Minute
+0 -22 0 24 -204786 -1 -1 6 256;
+#N canvas 785 70 813 629 init 0;
+#X msg 76 147 \; chirps xticks 60 60 1440;
+#X msg 75 108 \; chirps bounds 0 30 1440 0;
+#X msg 76 183 \; chirps yticks 5 5 1;
+#X obj 24 63 loadbang;
+#X obj 23 36 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 76 220 \; chirps ylabel -15 5 10 15 20 25 30;
+#X msg 73 262 \; threshold 80;
+#X msg 74 312 \; pd dsp 1;
+#X msg 70 351 \; clear 1;
+#X connect 3 0 1 0;
+#X connect 3 0 0 0;
+#X connect 3 0 2 0;
+#X connect 3 0 5 0;
+#X connect 3 0 6 0;
+#X connect 3 0 7 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X restore 363 383 pd init;
+#X text 222 38 6am;
+#X text 347 38 9am;
+#X text 470 38 12pm;
+#X text 599 37 3pm;
+#X text 724 38 6pm;
+#X text 848 38 9pm;
+#X obj 7 344 bng 30 250 50 0 clear empty Clear_Graph 0 -15 0 15 -261234
+-1 -1;
+#X text 250 354 Time;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X coords 0 1 100 -1 500 300 1 0 0;
+#X restore -19 146 graph;
+#X obj 315 330 nbx 5 14 50 98 0 1 empty threshold Threshold 0 -8 0
+10 -261682 -1 -1 80 256;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 2 0 4 1;
+#X connect 6 0 7 1;
+#X connect 19 0 6 0;
+#X coords 0 848 1 847 85 60 0;
