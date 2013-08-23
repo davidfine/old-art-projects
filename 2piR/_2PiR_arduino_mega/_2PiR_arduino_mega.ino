@@ -88,15 +88,13 @@ void stopFire() {
 
 
 // ### INTERRUPT FUNCTIONS ###
-void safeMode() {   // shut down all pins and sleep loop
+void safeMode() {   // shut down all pins and stop main loop.
   armed = 0;
   for (int i=0; i <= 15; i++) {
     digitalWrite((i+22) , LOW);
     lastState[i] = 0; 
   }
   digitalWrite(safeLightPin, HIGH);
-
-
 }  
 
 
