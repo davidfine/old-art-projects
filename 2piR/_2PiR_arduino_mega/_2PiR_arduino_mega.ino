@@ -14,15 +14,19 @@ optional arming warning buzzer on pin 38
 */
 
 // ### GLOBALS ###
-int sensorThreshold = 300;  // adjust sensitivity
-boolean lastState[15];  // 0 for Meh, 1 for ON FIRE!
+#define sensorThreshold 100  // adjust sensitivity
+#define minimumFlame 300 //milliseconds, latch time per effect when triggered.
+#define maxFlame 3000
+#define buzzerPin 38 // audible warning
+#define armLightPin 39
+#define safeLightPin 40
+#define armPin 20  // external interrupt 3
+#define safePin 21 // external interrupt 2
+
 unsigned long time;
 unsigned long flameCounter[15];  // the time millis() when each effect last triggered
-int minimumFlame = 300; //milliseconds, latch time per effect when triggered
-int buzzerPin = 38; // audible warning
-int armPin = 20;  // external interrupt 3
-int safePin = 21; // external interrupt 2
-boolean arming = 0;  // 3 second safety warnin
+boolean lastState[15];  // 0 for Meh, 1 for ON FIRE!
+boolean arming = 1;  // 3 second safety warnin
 boolean armed = 0; // Start in safe mode. If started this way, arm button is non-optional.
 
 void setup(){
@@ -59,11 +63,11 @@ int main(){
 void startFire() {
   for(int i=0; i<=15; i++) {
     boolean currentState = (analogRead(i) > sensorThreshold);
-    if (currentState > lastState[i]){ // state has changed from 0 to 1 
+    if (currentState > lastState[i]){ // state has changed from 0 to 1.
       digitalWrite((i + 22), HIGH);  // First effect relay is on pin22. 
-      lastState[i] = 1;
       flameCounter[i] = (millis() + minimumFlame);
     }
+    lastState[i] = currentState;
   }
 }
 
@@ -71,11 +75,15 @@ void startFire() {
 void stopFire() {
   time = millis();
   for(int i=0; i<=15; i++) {
-    if( lastState[i] ) {
-      if ( time > flameCounter[i] ) 
+    if( !lastState[i] ) {  // Effect is no longer being triggered
+      if( time > flameCounter[i] ){
         digitalWrite((i + 22), LOW);  
-      } 
+      }
+      else if((time - flameCounter[i]) > maxFlame){  // Effect has been on too long.
+        digitalWrite((i + 22), LOW);
+      }
     }
+  }
 }
 
 
@@ -86,11 +94,15 @@ void safeMode() {   // shut down all pins and sleep loop
     digitalWrite((i+22) , LOW);
     lastState[i] = 0; 
   }
+  digitalWrite(safeLightPin, HIGH);
+
 
 }  
 
 
 void armMode() {
+  digitalWrite(safeLightPin, LOW);
+  digitalWrite(armLightPin, HIGH);
   arming = 1; // Buzzer moved to main loop because can't use delay within interrupt function. 
 }
 
